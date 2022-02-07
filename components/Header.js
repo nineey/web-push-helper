@@ -4,15 +4,15 @@ import { signOut } from "next-auth/react";
 export default function Header() {
   return (
     <>
-      <div class="navbar mb-2 shadow-lg bg-neutral text-neutral-content rounded-box mb-10">
-        <div class="flex-1 px-2 mx-2 lg:flex">
-          <span class="text-lg font-bold">Web Push Helper</span>
+      <div className="navbar mb-2 shadow-lg bg-neutral text-neutral-content rounded-box mb-10">
+        <div className="flex-1 px-2 mx-2 lg:flex">
+          <span className="text-lg font-bold">Web Push Helper</span>
         </div>
 
-        <div class="flex-none">
+        <div className="flex-none">
           <Link href="/api/auth/signout">
             <button
-              class="btn btn-square btn-ghost"
+              className="btn btn-square btn-ghost"
               onClick={(e) => {
                 e.preventDefault();
                 signOut();
@@ -22,7 +22,7 @@ export default function Header() {
                 xmlns="http://www.w3.org/2000/svg"
                 fill="#ffffff"
                 viewBox="0 0 24 24"
-                class="inline-block w-6 h-6 stroke-current"
+                className="inline-block w-6 h-6 stroke-current"
               >
                 <path
                   stroke-width="0"
@@ -33,9 +33,9 @@ export default function Header() {
           </Link>
         </div>
 
-        <div class="flex-none">
-          <div class="avatar">
-            <div class="rounded-full w-10 h-10 m-1">
+        <div className="flex-none">
+          <div className="avatar">
+            <div className="rounded-full w-10 h-10 m-1">
               <img src="https://i.pravatar.cc/500?img=32"></img>
             </div>
           </div>
