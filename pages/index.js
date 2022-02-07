@@ -55,7 +55,7 @@ export default function Home() {
       ) : (
         <div>Please fetch first.</div>
       )}
-      <button class="btn btn-primary">primary</button>
+      <button className="btn btn-primary">primary</button>
     </Layout>
   );
 }

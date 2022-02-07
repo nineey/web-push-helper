@@ -28,7 +28,7 @@ export default function ScrapeForm({ slug, setSlug, setTitle, setImageUrl }) {
 
   return (
     <>
-      <span class="text-lg mr-3">https://daydeal.ch/</span>
+      <span className="text-lg mr-3">https://daydeal.ch/</span>
       <input
         type="text"
         placeholder="slug to deal"
