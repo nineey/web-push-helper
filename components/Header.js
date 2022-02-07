@@ -5,32 +5,13 @@ export default function Header() {
   const { data: session } = useSession();
   return (
     <>
-      <div className="mb-5 h-50 pt-1 pb-5 bg-green-600">
-        <div className="container mx-auto mt-5">
-          <h1 className="text-3xl font-bold text-white">
-            DayDeal Web Push Handler
-          </h1>
-        </div>
-      </div>
-      <ul>
-        {!session && (
-          <li>
-            <Link href="/api/auth/signin">
-              <a
-                onClick={(e) => {
-                  e.preventDefault();
-                  signIn();
-                }}
-              >
-                Login
-              </a>
-            </Link>
-          </li>
-        )}
-        {session && (
-          <li>
+      <div className="mb-5 h-14 bg-gray-600">
+        <div className="container mx-auto px-4 h-full flex flex-row justify-between items-center">
+          <h1 className="text-3xl font-bold text-white">Web Push Helper</h1>
+          <div className="content-center">
             <Link href="/api/auth/signout">
               <a
+                className="hover:text-white"
                 onClick={(e) => {
                   e.preventDefault();
                   signOut();
@@ -39,9 +20,9 @@ export default function Header() {
                 Logout
               </a>
             </Link>
-          </li>
-        )}
-      </ul>
+          </div>
+        </div>
+      </div>
     </>
   );
 }

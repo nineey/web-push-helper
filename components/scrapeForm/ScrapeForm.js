@@ -25,7 +25,7 @@ export default function ScrapeForm({ url, setUrl, setTitle, setImageUrl }) {
         <input
           type="text"
           placeholder="URL (https://daydeal.ch/...)"
-          className="w-1/2 border-2 border-green-600 p-1"
+          className="w-full lg:w-1/2 border-2 border-green-600 p-1"
           value={url}
           onChange={(e) => setUrl(e.target.value)}
         ></input>
@@ -36,7 +36,7 @@ export default function ScrapeForm({ url, setUrl, setTitle, setImageUrl }) {
           onClick={() => {
             scrapeHTML(url);
           }}
-          className="w-32 bg-green-600 hover:bg-green-500 rounded-md text-white font-bold"
+          className="w-44 h-10 text-xl bg-green-600 hover:bg-green-500 rounded-md text-white font-bold"
         >
           Fetch!
         </button>

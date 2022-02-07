@@ -20,24 +20,24 @@ export default NextAuth({
         },
         password: { label: "Password", type: "password" },
       },
-      authorize: (credentials) => {
-        // database look up
+      async authorize(credentials) {
         if (
           credentials.username === process.env.CREDENTIALS_USERNAME &&
           credentials.password === process.env.CREDENTIALS_PASSWORD
         ) {
           return {
+            id: 2,
             name: credentials.username,
           };
+        } else {
+          // login failed
+          return null;
         }
-
-        // login failed
-        return null;
       },
     }),
   ],
   callbacks: {
-    jwt: ({ token, user }) => {
+    jwt: async ({ token, user }) => {
       // first time jwt callback is run, user object is available
       if (user) {
         token.id = user.id;
@@ -45,9 +45,9 @@ export default NextAuth({
 
       return token;
     },
-    session: ({ session, token }) => {
+    session: async ({ session, token }) => {
       if (token) {
-        session.id = token.id;
+        session.user.id = token.id;
       }
 
       return session;
