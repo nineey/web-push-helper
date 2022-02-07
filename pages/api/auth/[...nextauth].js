@@ -1,14 +1,7 @@
 import NextAuth from "next-auth";
-// import GithubProvider from "next-auth/providers/github";
 import CredentialProvider from "next-auth/providers/credentials";
 
 export default NextAuth({
-  //   providers: [
-  //     GithubProvider({
-  //       clientId: process.env.GITHUB_ID,
-  //       clientSecret: process.env.GITHUB_SECRET,
-  //     }),
-  //   ],
   providers: [
     CredentialProvider({
       name: "credentials",
@@ -59,6 +52,5 @@ export default NextAuth({
   },
   theme: {
     colorScheme: "light",
-    logo: "", // Absolute URL to image
   },
 });

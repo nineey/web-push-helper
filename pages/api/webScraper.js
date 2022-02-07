@@ -2,7 +2,6 @@ import axios from "axios";
 
 export default async function handler(req, res) {
   const { url } = req.query;
-  console.log(url);
 
   const isValidUrl = (url) => {
     try {
@@ -14,7 +13,7 @@ export default async function handler(req, res) {
   };
 
   if (!isValidUrl(url)) {
-    console.log("Invalid URL");
+    console.error("Invalid URL");
   }
 
   const sourcecode = (await axios.get(url)).data;

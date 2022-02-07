@@ -10,7 +10,7 @@ export default function Home() {
   const { data: session, status } = useSession();
   const router = useRouter();
 
-  const [url, setUrl] = useState("");
+  const [slug, setSlug] = useState("");
   const [title, setTitle] = useState("");
   const [imageUrl, setImageUrl] = useState("");
 
@@ -34,16 +34,16 @@ export default function Home() {
 
   return (
     <Layout title="Home: DayDeal Web Push">
-      <h2 className="text-xl font-bold mb-2">Enter a deal link:</h2>
+      <h2 className="text-xl font-bold mb-2">Step 1: Enter a deal link</h2>
       <ScrapeForm
-        url={url}
-        setUrl={setUrl}
+        slug={slug}
+        setSlug={setSlug}
         setTitle={setTitle}
         setImageUrl={setImageUrl}
       />
 
       <hr className="mt-5 mb-5" />
-      <h2 className="text-xl font-bold mb-2">Data for notification</h2>
+      <h2 className="text-xl font-bold mb-2">Step 2: Check the data</h2>
 
       {title || imageUrl ? (
         <MessageFields
@@ -55,6 +55,7 @@ export default function Home() {
       ) : (
         <div>Please fetch first.</div>
       )}
+      <button class="btn btn-primary">primary</button>
     </Layout>
   );
 }
