@@ -14,9 +14,8 @@ export default NextAuth({
       name: "credentials",
       credentials: {
         username: {
-          label: "Email",
+          label: "Username",
           type: "text",
-          placeholder: "johndoe@test.com",
         },
         password: { label: "Password", type: "password" },
       },
@@ -26,7 +25,7 @@ export default NextAuth({
           credentials.password === process.env.CREDENTIALS_PASSWORD
         ) {
           return {
-            id: 2,
+            id: 1,
             name: credentials.username,
           };
         } else {
@@ -36,26 +35,30 @@ export default NextAuth({
       },
     }),
   ],
-  callbacks: {
-    jwt: async ({ token, user }) => {
-      // first time jwt callback is run, user object is available
-      if (user) {
-        token.id = user.id;
-      }
+  // callbacks: {
+  //   jwt: async ({ token, user }) => {
+  //     // first time jwt callback is run, user object is available
+  //     if (user) {
+  //       token.id = user.id;
+  //     }
 
-      return token;
-    },
-    session: async ({ session, token }) => {
-      if (token) {
-        session.user.id = token.id;
-      }
+  //     return token;
+  //   },
+  //   session: async ({ session, token }) => {
+  //     if (token) {
+  //       session.user.id = token.id;
+  //     }
 
-      return session;
-    },
-  },
+  //     return session;
+  //   },
+  // },
   secret: process.env.CREDENTIALS_SECRET,
   jwt: {
     secret: process.env.CREDENTIALS_SECRET,
     encryption: true,
+  },
+  theme: {
+    colorScheme: "light",
+    logo: "", // Absolute URL to image
   },
 });
