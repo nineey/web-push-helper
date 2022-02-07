@@ -1,6 +1,6 @@
 import { useSession } from "next-auth/react";
 
-export default function securepage() {
+export default function Securepage() {
   const { data: session, status } = useSession();
   console.log(session);
 
