@@ -45,17 +45,12 @@ export default function Home() {
       <hr className="mt-5 mb-5" />
       <h2 className="text-xl font-bold mb-2">Step 2: Check the data</h2>
 
-      {title || imageUrl ? (
-        <MessageFields
-          title={title}
-          setTitle={setTitle}
-          imageUrl={imageUrl}
-          setImageUrl={setImageUrl}
-        />
-      ) : (
-        <div>Please fetch first.</div>
-      )}
-      <button className="btn btn-primary">primary</button>
+      <MessageFields
+        title={title}
+        setTitle={setTitle}
+        imageUrl={imageUrl}
+        setImageUrl={setImageUrl}
+      />
     </Layout>
   );
 }

@@ -1,11 +1,13 @@
-import { Select } from "@chakra-ui/react";
-import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useToast } from "@chakra-ui/react";
+import DatePickerForm from "./forms/DatePicker";
+import sendMessage, { handleDescriptionByType } from "./helpers";
 
-// https://www.npmjs.com/package/react-datepicker
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import FormTitle from "./forms/FormTitle";
+import SelectDraft from "./forms/SelectDraft";
+import ImageUrl from "./forms/ImageUrl";
+import SelectDealType from "./forms/SelectDealType";
+import FormDescription from "./forms/FormDescription";
 
 export default function MessageFields({
   title,
@@ -13,84 +15,48 @@ export default function MessageFields({
   imageUrl,
   setImageUrl,
 }) {
-  const [isDraft, setDraft] = useState(true);
-  const [sendDate, setSendDate] = useState(new Date().setHours(9, 0, 0, 0));
   const toast = useToast();
 
-  const sendMessage = async (title, imageUrl) => {
-    console.log(title);
-    console.log(imageUrl);
-    const data = (
-      await axios.post("/api/getback", {
-        title: title,
-        imageUrl: imageUrl,
-        isDraft: isDraft,
-      })
-    ).data;
-    console.log(data);
-  };
+  // message relevant content
+  const [isDraft, setDraft] = useState(true);
+  const [dealType, setDealType] = useState("daily");
+  const [description, setDescription] = useState("");
+  const price = "149.–";
+  const [sendDate, setSendDate] = useState(new Date().setHours(9, 0, 0, 0));
+
+  useEffect(() => {
+    handleDescriptionByType(dealType, setDescription, price);
+  }, [dealType]);
 
   return (
     <>
-      <div>
-        <p className="font-semibold">Title</p>
-        <input
-          type="text"
-          className="w-full lg:w-1/2 border border-green-600 p-1"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        ></input>
-      </div>
+      <SelectDealType {...{ setDealType }} />
+      <FormTitle {...{ title, setTitle }} />
+      <FormDescription {...{ description, setDescription }} />
 
       <div className="mt-3">
-        <p className="font-semibold">Image URL</p>
-        <input
-          type="text"
-          className="w-full lg:w-1/2 border border-green-600 p-1"
-          value={imageUrl}
-          onChange={(e) => setImageUrl(e.target.value)}
-        ></input>
-        <img src={imageUrl} width="300" className="mt-5"></img>
+        <ImageUrl {...{ imageUrl, setImageUrl }} />
       </div>
 
       <div className="w-56 mt-3">
-        <p className="font-semibold">Draft?</p>
-
-        <Select
-          borderColor="green.400"
-          onChange={(e) => setDraft(e.target.value)}
-        >
-          <option value="true" selected>
-            Yes
-          </option>
-          <option value="false">Nope</option>
-        </Select>
+        <SelectDraft {...{ isDraft, setDraft }} />
       </div>
 
       <div className="w-56 mt-3">
-        <p className="font-semibold">Time to send</p>
-
-        <div className="border border-green-600 p-2 border-rounded-5">
-          {" "}
-          <DatePicker
-            selected={sendDate}
-            onChange={(date) => setSendDate(date)}
-            showTimeSelect
-            dateFormat="dd.MM.yyyy – hh:mm aa"
-          />
-        </div>
+        <DatePickerForm {...{ sendDate, setSendDate }} />
       </div>
 
       <button
         className="mt-5 w-56 h-16 text-xl bg-red-600 hover:bg-red-500 rounded-md text-white font-bold"
         onClick={() => {
-          sendMessage(title, imageUrl),
-            toast({
-              title: `Notification sent`,
-              position: "top-right",
-              isClosable: true,
-              status: "success",
-            });
+          sendMessage(title, description, imageUrl, isDraft, sendDate),
+            console.log(title, description, imageUrl, isDraft, sendDate);
+          toast({
+            title: `Notification sent`,
+            position: "top-right",
+            isClosable: true,
+            status: "success",
+          });
         }}
       >
         Schedule now!

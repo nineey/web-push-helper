@@ -9,7 +9,7 @@ export default function Layout({ title, children }) {
         <meta name="description" content="description" />
       </Head>
 
-      <div className="container mx-auto mt-5 px-4">
+      <div className="container mx-auto mt-5 px-4 mb-5">
         <Header />
 
         {children}

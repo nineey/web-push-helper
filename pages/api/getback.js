@@ -21,17 +21,26 @@ export default async function handler(req, res) {
     }
 
     if (req.method === "POST") {
-      const { title, imageUrl, isDraft } = req.body;
+      const { title, description, imageUrl, isDraft, sendDate } = req.body;
+      const date = new Date(sendDate);
+
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, "0");
+      const day = String(date.getDate()).padStart(2, "0");
+      const hours = String(date.getHours()).padStart(2, "0");
+      const minutes = String(date.getMinutes()).padStart(2, "0");
+
+      const send_at = `${year}-${month}-${day} ${hours}:${minutes}`;
 
       // prepare body
       const body = {
         is_draft: isDraft === "true" ? true : false,
         template_id: "mpuxJ",
-        send_at: "2022-02-04 16:35",
+        send_at: send_at,
         lang: {
           de: {
             title: title,
-            body: "Testbody nne",
+            body: description,
             image: imageUrl,
           },
         },
@@ -39,16 +48,20 @@ export default async function handler(req, res) {
 
       res.status(200).json(body);
 
-      // const data = (
-      //   await axios.post("https://api.getback.ch/v1/push/message", body, {
-      //     headers: {
-      //       Authorization: process.env.GETBACK_API_KEY,
-      //       "Content-Type": "application/json",
-      //     },
-      //   })
-      // ).data;
-      // console.log(data);
-      // res.status(200).json(data);
+      // try {
+      //   const data = (
+      //     await axios.post("https://api.getback.ch/v1/push/message", body, {
+      //       headers: {
+      //         Authorization: process.env.GETBACK_API_KEY,
+      //         "Content-Type": "application/json",
+      //       },
+      //     })
+      //   ).data;
+      //   console.log(data);
+      //   res.status(200).json(data);
+      // } catch {
+      //   res.status(500).send("Could not trigger notification");
+      // }
     }
   } else {
     res.status(401).json("No access!");
