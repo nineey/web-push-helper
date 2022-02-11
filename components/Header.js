@@ -25,7 +25,7 @@ export default function Header() {
               <FaSmileWink className="inline" />
             </p>
             <div className="modal-action">
-              <label for="modal-credits" className="btn">
+              <label htmlFor="modal-credits" className="btn">
                 Thanks!
               </label>
             </div>
