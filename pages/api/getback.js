@@ -1,5 +1,3 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-
 import axios from "axios";
 import { getSession } from "next-auth/react";
 
@@ -21,7 +19,8 @@ export default async function handler(req, res) {
     }
 
     if (req.method === "POST") {
-      const { title, description, imageUrl, isDraft, sendDate } = req.body;
+      const { title, description, imageUrl, isDraft, sendDate, dealType } =
+        req.body;
       const date = new Date(sendDate);
 
       const year = date.getFullYear();
@@ -31,11 +30,15 @@ export default async function handler(req, res) {
       const minutes = String(date.getMinutes()).padStart(2, "0");
 
       const send_at = `${year}-${month}-${day} ${hours}:${minutes}`;
+      const template_id =
+        dealType === "special"
+          ? process.env.GETBACK_TEMPLATE_ID_SPECIALS
+          : process.env.GETBACK_TEMPLATE_ID_DAILY_WEEKLY;
 
       // prepare body
       const body = {
         is_draft: isDraft === "true" ? true : false,
-        template_id: "mpuxJ",
+        template_id: template_id,
         send_at: send_at,
         lang: {
           de: {
@@ -46,8 +49,10 @@ export default async function handler(req, res) {
         },
       };
 
-      res.status(200).json(body);
+      //testing
+      res.status(200).json({ message_id: 123456789 });
 
+      // !!! only uncomment this when you want to trigger real messages !!!
       // try {
       //   const data = (
       //     await axios.post("https://api.getback.ch/v1/push/message", body, {
@@ -60,7 +65,7 @@ export default async function handler(req, res) {
       //   console.log(data);
       //   res.status(200).json(data);
       // } catch {
-      //   res.status(500).send("Could not trigger notification");
+      //   res.status(500).send("Getback API error");
       // }
     }
   } else {

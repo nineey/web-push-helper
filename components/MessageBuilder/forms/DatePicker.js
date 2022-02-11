@@ -5,7 +5,7 @@ import "react-datepicker/dist/react-datepicker.css";
 export default function DatePickerForm({ sendDate, setSendDate }) {
   return (
     <>
-      <p className="font-semibold">Time to send</p>
+      <p className="font-semibold">Versandzeitpunkt</p>
 
       <div className="border p-3 rounded-md border-slate-300">
         {" "}

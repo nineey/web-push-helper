@@ -14,7 +14,8 @@ export default NextAuth({
       },
       async authorize(credentials) {
         if (
-          credentials.username === process.env.CREDENTIALS_USERNAME &&
+          credentials.username.toLowerCase() ===
+            process.env.CREDENTIALS_USERNAME.toLowerCase() &&
           credentials.password === process.env.CREDENTIALS_PASSWORD
         ) {
           return {

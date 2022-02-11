@@ -1,14 +1,40 @@
 import Link from "next/link";
 import { signOut } from "next-auth/react";
+import { BsFillBellFill } from "react-icons/bs";
+import { FaSmileWink } from "react-icons/fa";
 
 export default function Header() {
   return (
     <>
       <div className="navbar mb-2 shadow-lg bg-neutral text-neutral-content rounded-box mb-10">
         <div className="flex-1 px-2 mx-2 lg:flex">
-          <span className="text-lg font-bold">Web Push Helper</span>
+          <span className="text-lg font-bold">
+            Web Push Helper <BsFillBellFill className="inline" />
+          </span>
         </div>
 
+        <label for="modal-credits" class="btn btn-ghost modal-button">
+          Version 1.0
+        </label>
+        <input type="checkbox" id="modal-credits" class="modal-toggle" />
+        <div class="modal">
+          <div class="modal-box">
+            <p className="text-slate-800	">
+              This tool was built by Nicolas while drinking tea on some free
+              evenings. Hope it makes your everyday life a little bit easier.{" "}
+              <FaSmileWink className="inline" />
+            </p>
+            <div class="modal-action">
+              <label for="modal-credits" class="btn">
+                Thanks!
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <button className="btn btn-ghost px-2 mr-3">
+          <a href="mailto:dev@nicolasneeser.ch">Help?</a>
+        </button>
         <div className="flex-none">
           <Link href="/api/auth/signout">
             <button
@@ -31,14 +57,6 @@ export default function Header() {
               </svg>
             </button>
           </Link>
-        </div>
-
-        <div className="flex-none">
-          <div className="avatar">
-            <div className="rounded-full w-10 h-10 m-1">
-              <img src="https://i.pravatar.cc/500?img=32"></img>
-            </div>
-          </div>
         </div>
       </div>
     </>
