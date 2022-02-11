@@ -13,19 +13,19 @@ export default function Header() {
           </span>
         </div>
 
-        <label for="modal-credits" class="btn btn-ghost modal-button">
+        <label htmlFor="modal-credits" className="btn btn-ghost modal-button">
           Version 1.0
         </label>
-        <input type="checkbox" id="modal-credits" class="modal-toggle" />
-        <div class="modal">
-          <div class="modal-box">
+        <input type="checkbox" id="modal-credits" className="modal-toggle" />
+        <div className="modal">
+          <div className="modal-box">
             <p className="text-slate-800	">
               This tool was built by Nicolas while drinking tea on some free
               evenings. Hope it makes your everyday life a little bit easier.{" "}
               <FaSmileWink className="inline" />
             </p>
-            <div class="modal-action">
-              <label for="modal-credits" class="btn">
+            <div className="modal-action">
+              <label for="modal-credits" className="btn">
                 Thanks!
               </label>
             </div>
