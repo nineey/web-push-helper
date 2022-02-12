@@ -8,12 +8,15 @@ export default function Header() {
     <>
       <div className="navbar mb-2 shadow-lg bg-neutral text-neutral-content rounded-box mb-10">
         <div className="flex-1 px-2 mx-2 lg:flex">
-          <span className="text-lg font-bold">
+          <span className="text-lg font-bold ">
             Web Push Helper <BsFillBellFill className="inline" />
           </span>
         </div>
 
-        <label htmlFor="modal-credits" className="btn btn-ghost modal-button">
+        <label
+          htmlFor="modal-credits"
+          className="btn btn-ghost modal-button hidden md:flex"
+        >
           Version 1.0
         </label>
         <input type="checkbox" id="modal-credits" className="modal-toggle" />
