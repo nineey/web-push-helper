@@ -22,7 +22,7 @@ export default function MessageBuilder({
   const [isDraft, setDraft] = useState(false);
   const [dealType, setDealType] = useState("daily");
   const [finalDescription, setFinalDescription] = useState("");
-  const [sendDate, setSendDate] = useState(new Date().setHours(9, 0, 0, 0));
+  const [sendDate, setSendDate] = useState(defaultDate());
   const [error, setError] = useState("");
 
   const date = new Date(sendDate);
@@ -31,6 +31,16 @@ export default function MessageBuilder({
   const day = String(date.getDate()).padStart(2, "0");
   const hours = String(date.getHours()).padStart(2, "0");
   const minutes = String(date.getMinutes()).padStart(2, "0");
+
+  function defaultDate() {
+    const today = new Date();
+    if (today.getHours() >= 9) {
+      const tomorrow = new Date();
+      tomorrow.setDate(today.getDate() + 1);
+      return tomorrow.setHours(9, 0, 0, 0);
+    }
+    return new Date().setHours(9, 0, 0, 0);
+  }
 
   useEffect(() => {
     handleDescriptionByType(
@@ -65,16 +75,17 @@ export default function MessageBuilder({
             <ImageUrl {...{ imageUrl, setImageUrl }} />
           </div>
         </div>
-        {/* right 2 */}
+        {/* right */}
         <div>
           <div className="w-56 mt-3">
             <SelectDraft {...{ isDraft, setDraft }} />
           </div>
 
-          <div className="w-56 mt-3">
-            <DatePickerForm {...{ sendDate, setSendDate }} />
+          <div className="flex items-center">
+            <div className="w-56 mt-3">
+              <DatePickerForm {...{ sendDate, setSendDate }} />
+            </div>
           </div>
-
           <div className="mt-3">
             <p className="font-semibold">Empfänger-Segment</p>
             {dealType === "daily" || dealType === "weekly"

@@ -5,7 +5,7 @@ export default function Layout({ title, children }) {
   return (
     <>
       <Head>
-        <title>DayDeal Web Push</title>
+        <title>Web Push Helper</title>
         <meta name="description" content="description" />
       </Head>
 

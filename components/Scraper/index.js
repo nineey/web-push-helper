@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { AppStatusContext } from "../../pages/index";
 
 export default function Scraper({
   setTitle,
