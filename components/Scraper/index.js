@@ -51,7 +51,7 @@ export default function Scraper({
           <input
             type="text"
             placeholder="slug to deal"
-            className="input input-bordered w-96 text-lg font-semibold"
+            className="input input-bordered w-full md:w-96 text-lg font-semibold"
             value={slug}
             onChange={(e) => setSlug(e.target.value)}
           ></input>
