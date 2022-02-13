@@ -1,9 +1,9 @@
 import NextAuth from "next-auth";
-import CredentialProvider from "next-auth/providers/credentials";
+import CredentialsProvider from "next-auth/providers/credentials";
 
 export default NextAuth({
   providers: [
-    CredentialProvider({
+    CredentialsProvider({
       name: "credentials",
       credentials: {
         username: {
@@ -46,11 +46,11 @@ export default NextAuth({
   //     return session;
   //   },
   // },
-  secret: process.env.CREDENTIALS_SECRET,
-  jwt: {
-    secret: process.env.CREDENTIALS_SECRET,
-    encryption: true,
-  },
+  // secret: process.env.CREDENTIALS_SECRET,
+  // jwt: {
+  //   secret: process.env.CREDENTIALS_SECRET,
+  //   encryption: true,
+  // },
   theme: {
     colorScheme: "light",
   },
