@@ -48,7 +48,6 @@ export default function Header() {
             onClick={(e) => {
               e.preventDefault();
               signOut();
-              router.push("/api/auth/signin");
             }}
           >
             <svg
