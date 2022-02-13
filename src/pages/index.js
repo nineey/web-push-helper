@@ -39,13 +39,15 @@ export default function Home() {
     <Layout title="Home: DayDeal Web Push">
       <h2 className="text-xl font-bold mb-2">Schritt 1: Deal-URL eingeben</h2>
       <Scraper
-        setTitle={setTitle}
-        setImageUrl={setImageUrl}
-        setDayDealPrice={setDayDealPrice}
-        setOriginalPrice={setOriginalPrice}
-        dataFetched={dataFetched}
-        setDataFetched={setDataFetched}
-        setDataSent={setDataSent}
+        {...{
+          setTitle,
+          setImageUrl,
+          setDayDealPrice,
+          setOriginalPrice,
+          dataFetched,
+          setDataFetched,
+          setDataSent,
+        }}
       />
 
       <hr className="mt-5 mb-5" />
@@ -57,13 +59,15 @@ export default function Home() {
           </h2>
 
           <MessageBuilder
-            title={title}
-            setTitle={setTitle}
-            imageUrl={imageUrl}
-            setImageUrl={setImageUrl}
-            daydealPrice={daydealPrice}
-            originalPrice={originalPrice}
-            setDataSent={setDataSent}
+            {...{
+              title,
+              setTitle,
+              imageUrl,
+              setImageUrl,
+              daydealPrice,
+              originalPrice,
+              setDataSent,
+            }}
           />
         </>
       )}

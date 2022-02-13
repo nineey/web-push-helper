@@ -1,7 +1,6 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState } from "react";
 import DatePickerForm from "./forms/DatePicker";
-import sendMessage from "../helpers/sendMessage";
-import handleDescriptionByType from "../helpers/handleDescriptionByType";
+import sendMessage from "../../utils/sendMessage";
 
 import FormTitle from "./forms/FormTitle";
 import SelectDraft from "./forms/SelectDraft";
@@ -42,13 +41,32 @@ export default function MessageBuilder({
     return new Date().setHours(9, 0, 0, 0);
   }
 
-  useEffect(() => {
-    handleDescriptionByType(
-      dealType,
-      setFinalDescription,
-      daydealPrice,
-      originalPrice
+  function handleDescriptionByType() {
+    const timeIndicator = {
+      daily: "Heute für nur",
+      weekly: "Diese Woche für nur",
+      special: "Jetzt für nur",
+    };
+
+    // function excludeCurrency(price) {
+    //   if (price.includes("CHF")) {
+    //     return price.slice(-4);
+    //   }
+    // }
+
+    setFinalDescription(
+      `${
+        dealType === "daily"
+          ? timeIndicator.daily
+          : dealType === "weekly"
+          ? timeIndicator.weekly
+          : timeIndicator.special
+      } ${daydealPrice} statt ${originalPrice} bei DayDeal.ch`
     );
+  }
+
+  useEffect(() => {
+    handleDescriptionByType();
   }, [dealType, daydealPrice, originalPrice]);
 
   return (
