@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import "../node_modules/@syncfusion/ej2-base/styles/material.css";
+@import "../../node_modules/@syncfusion/ej2-base/styles/material.css";
 
 html,
 body {
