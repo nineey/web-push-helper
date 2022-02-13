@@ -47,8 +47,8 @@ export default function Header() {
             className="btn btn-square btn-ghost"
             onClick={(e) => {
               e.preventDefault();
-              // router.push("/api/auth/signin");
-              signOut({ callbackUrl: "http://localhost:3000/api/auth/signin" });
+              signOut();
+              router.push("/api/auth/signin");
             }}
           >
             <svg
