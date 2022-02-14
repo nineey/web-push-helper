@@ -6,16 +6,16 @@ export default async function handler(req, res) {
 
   if (session) {
     if (req.method === "GET") {
+      const { messageId } = req.body;
       const data = (
-        await axios.get("https://api.getback.ch/v1/push/message/73423", {
+        await axios.get(`https://api.getback.ch/v1/push/message/${messageId}`, {
           headers: {
             Authorization: process.env.GETBACK_API_KEY,
             "Content-Type": "application/json",
           },
         })
       ).data;
-      console.log(data);
-      res.status(200).json("haha!");
+      res.status(200).json(data);
     }
 
     if (req.method === "POST") {
@@ -43,13 +43,19 @@ export default async function handler(req, res) {
           : process.env.GETBACK_TEMPLATE_ID_DAILY_WEEKLY;
 
       const ttl =
-        dealType === "daily" ? "180" : dealType === "weekly" ? "2880" : "45";
+        dealType === "daily"
+          ? process.env.NEXT_PUBLIC_TTL_MINUTES_DAILY
+          : dealType === "weekly"
+          ? process.env.NEXT_PUBLIC_TTL_MINUTES_WEEKLY
+          : process.env.NEXT_PUBLIC_TTL_MINUTES_SPECIAL;
+
+      console.log(ttl);
 
       // prepare body
       const body = {
         is_draft: isDraft === "true" ? true : false,
         template_id: template_id,
-        ttl: ttl,
+        ttl: Number(ttl),
         send_at: send_at,
         lang: {
           de: {
@@ -62,7 +68,7 @@ export default async function handler(req, res) {
         },
       };
 
-      // console.log(body.lang.de.action_buttons[0].link);
+      console.log(body);
 
       //testing
       res.status(200).json({ message_id: 123456789 });

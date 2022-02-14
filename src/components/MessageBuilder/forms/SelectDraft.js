@@ -1,5 +1,3 @@
-import { Select } from "@chakra-ui/react";
-
 export default function SelectDraft({ isDraft, setDraft }) {
   return (
     <>

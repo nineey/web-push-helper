@@ -49,11 +49,11 @@ export default function MessageBuilder({
       special: "Jetzt für nur",
     };
 
-    // function excludeCurrency(price) {
-    //   if (price.includes("CHF")) {
-    //     return price.slice(-4);
-    //   }
-    // }
+    function excludeCurrency(price) {
+      if (price.includes("CHF")) {
+        return price.slice(4);
+      }
+    }
 
     setFinalDescription(
       `${
@@ -62,7 +62,9 @@ export default function MessageBuilder({
           : dealType === "weekly"
           ? timeIndicator.weekly
           : timeIndicator.special
-      } ${daydealPrice} statt ${originalPrice} bei DayDeal.ch`
+      } ${excludeCurrency(daydealPrice)} statt ${excludeCurrency(
+        originalPrice
+      )} bei DayDeal.ch`
     );
   }
 
@@ -115,10 +117,10 @@ export default function MessageBuilder({
           <div className="mt-3">
             <p className="font-semibold">Time-to-live</p>
             {dealType === "daily"
-              ? "3 Stunden"
+              ? `${process.env.NEXT_PUBLIC_TTL_MINUTES_DAILY / 60} Stunden`
               : dealType === "weekly"
-              ? "2 Tage"
-              : "45 Minuten"}
+              ? `${process.env.NEXT_PUBLIC_TTL_MINUTES_WEEKLY / 60} Stunden`
+              : `${process.env.NEXT_PUBLIC_TTL_MINUTES_SPECIAL} Minuten`}
           </div>
 
           {error && (
@@ -166,6 +168,10 @@ export default function MessageBuilder({
             <span className="font-extrabold">
               {hours}:{minutes} Uhr
             </span>
+            &nbsp;
+            {isDraft === "true" && (
+              <span className="text-black">(Entwurf)</span>
+            )}
           </button>
         </div>
       </div>
