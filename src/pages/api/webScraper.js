@@ -6,22 +6,22 @@ export default async function handler(req, res) {
   const session = await getSession({ req });
 
   if (session) {
-    const { url } = req.query;
+    const { dealUrl } = req.query;
 
-    const isValidUrl = (url) => {
+    const isValidUrl = (dealUrl) => {
       try {
-        new URL(url);
+        new URL(dealUrl);
       } catch (e) {
         return false;
       }
       return true;
     };
 
-    if (!isValidUrl(url)) {
+    if (!isValidUrl(dealUrl)) {
       console.error("Invalid URL");
     }
 
-    const sourcecode = (await axios.get(url)).data;
+    const sourcecode = (await axios.get(dealUrl)).data;
     const root = parse(sourcecode);
 
     const daydealPrice = root.querySelector(
@@ -36,8 +36,6 @@ export default async function handler(req, res) {
     const imageUrl = root
       .querySelector("[property~=og:image][content]")
       .getAttribute("content");
-
-    console.log(daydealPrice, originalPrice, dealTitle, imageUrl);
 
     const finalRes = {
       title: dealTitle,

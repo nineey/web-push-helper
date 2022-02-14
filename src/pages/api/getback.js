@@ -19,8 +19,15 @@ export default async function handler(req, res) {
     }
 
     if (req.method === "POST") {
-      const { title, description, imageUrl, isDraft, sendDate, dealType } =
-        req.body;
+      const {
+        title,
+        description,
+        imageUrl,
+        isDraft,
+        sendDate,
+        dealUrl,
+        dealType,
+      } = req.body;
       const date = new Date(sendDate);
 
       const year = date.getFullYear();
@@ -35,23 +42,27 @@ export default async function handler(req, res) {
           ? process.env.GETBACK_TEMPLATE_ID_SPECIALS
           : process.env.GETBACK_TEMPLATE_ID_DAILY_WEEKLY;
 
+      const ttl =
+        dealType === "daily" ? "180" : dealType === "weekly" ? "2880" : "45";
+
       // prepare body
       const body = {
         is_draft: isDraft === "true" ? true : false,
         template_id: template_id,
+        ttl: ttl,
         send_at: send_at,
         lang: {
           de: {
             title: title,
             body: description,
             image: imageUrl,
-            link: "https://daydeal.ch",
-            action_buttons: [
-              { text: "Jetzt bestellen", link: "https://daydeal.ch" },
-            ],
+            link: dealUrl,
+            action_buttons: [{ text: "Jetzt bestellen", link: dealUrl }],
           },
         },
       };
+
+      // console.log(body.lang.de.action_buttons[0].link);
 
       //testing
       res.status(200).json({ message_id: 123456789 });

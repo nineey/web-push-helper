@@ -10,6 +10,7 @@ import FormDescription from "./forms/FormDescription";
 
 export default function MessageBuilder({
   title,
+  dealUrl,
   setTitle,
   imageUrl,
   setImageUrl,
@@ -116,7 +117,7 @@ export default function MessageBuilder({
             {dealType === "daily"
               ? "3 Stunden"
               : dealType === "weekly"
-              ? "3 Tage"
+              ? "2 Tage"
               : "45 Minuten"}
           </div>
 
@@ -148,6 +149,7 @@ export default function MessageBuilder({
                 title,
                 finalDescription,
                 imageUrl,
+                dealUrl,
                 isDraft,
                 sendDate,
                 dealType,

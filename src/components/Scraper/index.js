@@ -9,16 +9,17 @@ export default function Scraper({
   setDataFetched,
   dataFetched,
   setDataSent,
+  dealUrl,
+  setUrl,
 }) {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const [url, setUrl] = useState("https://daydeal.ch/");
   const [slug, setSlug] = useState("");
 
-  async function scrapeHTML(url) {
+  async function scrapeHTML(dealUrl) {
     setLoading(true);
     try {
-      const data = (await axios.get("/api/webScraper", { params: { url } }))
+      const data = (await axios.get("/api/webScraper", { params: { dealUrl } }))
         .data;
       setTitle(data.title);
       setImageUrl(data.imageUrl);
@@ -36,7 +37,7 @@ export default function Scraper({
 
   function onSubmit(e) {
     e.preventDefault();
-    scrapeHTML(url);
+    scrapeHTML(dealUrl);
   }
 
   useEffect(() => {

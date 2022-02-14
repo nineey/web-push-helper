@@ -10,6 +10,7 @@ export default function Home() {
   const { data: session, status } = useSession();
   const router = useRouter();
 
+  const [dealUrl, setUrl] = useState("https://daydeal.ch/");
   const [title, setTitle] = useState("");
   const [daydealPrice, setDayDealPrice] = useState("");
   const [originalPrice, setOriginalPrice] = useState("");
@@ -47,6 +48,8 @@ export default function Home() {
           dataFetched,
           setDataFetched,
           setDataSent,
+          dealUrl,
+          setUrl,
         }}
       />
 
@@ -60,6 +63,7 @@ export default function Home() {
 
           <MessageBuilder
             {...{
+              dealUrl,
               title,
               setTitle,
               imageUrl,

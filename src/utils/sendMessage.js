@@ -2,8 +2,9 @@ import axios from "axios";
 
 const sendMessage = async (
   title,
-  description,
+  finalDescription,
   imageUrl,
+  dealUrl,
   isDraft,
   sendDate,
   dealType,
@@ -14,11 +15,12 @@ const sendMessage = async (
     const data = (
       await axios.post("/api/getback", {
         title: title,
-        description: description,
+        description: finalDescription,
         imageUrl: imageUrl,
         isDraft: isDraft,
         sendDate: sendDate,
         dealType: dealType,
+        dealUrl: dealUrl,
       })
     ).data;
     setDataSent({ status: true, data: data });
