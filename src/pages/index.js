@@ -32,11 +32,7 @@ export default function Home() {
     );
   }
 
-  if (
-    status === "unauthenticated" ||
-    session === undefined ||
-    session === null
-  ) {
+  if (status === "unauthenticated") {
     return router.push("/api/auth/signin");
   }
 
