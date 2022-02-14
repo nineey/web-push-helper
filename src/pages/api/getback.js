@@ -71,23 +71,23 @@ export default async function handler(req, res) {
       console.log(body);
 
       //testing
-      res.status(200).json({ message_id: 123456789 });
+      // res.status(200).json({ message_id: 123456789 });
 
       // !!! only uncomment this when you want to trigger real messages !!!
-      // try {
-      //   const data = (
-      //     await axios.post("https://api.getback.ch/v1/push/message", body, {
-      //       headers: {
-      //         Authorization: process.env.GETBACK_API_KEY,
-      //         "Content-Type": "application/json",
-      //       },
-      //     })
-      //   ).data;
-      //   console.log(data);
-      //   res.status(200).json(data);
-      // } catch {
-      //   res.status(500).send("Getback API error");
-      // }
+      try {
+        const data = (
+          await axios.post("https://api.getback.ch/v1/push/message", body, {
+            headers: {
+              Authorization: process.env.GETBACK_API_KEY,
+              "Content-Type": "application/json",
+            },
+          })
+        ).data;
+        console.log(data);
+        res.status(200).json(data);
+      } catch {
+        res.status(500).send("Getback API error");
+      }
     }
   } else {
     res.status(401).json("No access!");
