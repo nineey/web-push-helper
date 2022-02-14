@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 import { Spinner } from "@chakra-ui/react";
 
 export default function Home() {
-  const { data: session, status } = useSession();
+  const { status, session } = useSession();
   const router = useRouter();
 
   const [dealUrl, setUrl] = useState("https://daydeal.ch/");
@@ -32,7 +32,11 @@ export default function Home() {
     );
   }
 
-  if (status === "unauthenticated") {
+  if (
+    status === "unauthenticated" ||
+    session === "undefined" ||
+    session === "null"
+  ) {
     return router.push("/api/auth/signin");
   }
 
