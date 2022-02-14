@@ -45,6 +45,10 @@ export default async function handler(req, res) {
             title: title,
             body: description,
             image: imageUrl,
+            link: "https://daydeal.ch",
+            action_buttons: [
+              { text: "Jetzt bestellen", link: "https://daydeal.ch" },
+            ],
           },
         },
       };
