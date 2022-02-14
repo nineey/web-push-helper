@@ -46,7 +46,7 @@ export default function Header() {
           <button
             className="btn btn-square btn-ghost"
             onClick={(e) => {
-              e.preventDefault();
+              // e.preventDefault();
               signOut();
             }}
           >
