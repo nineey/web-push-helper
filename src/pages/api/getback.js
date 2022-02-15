@@ -30,10 +30,7 @@ export default async function handler(req, res) {
         dealType,
       } = req.body;
       const date = new Date(sendDate);
-
-      console.log(
-        moment.parseZone(date).local(true).format("YYYY-MM-DD HH:mm")
-      );
+      const localDate = moment.utc(date).tz("Europe/Zurich");
 
       // const year = date.getFullYear();
       // const month = String(date.getMonth() + 1).padStart(2, "0");
@@ -43,10 +40,9 @@ export default async function handler(req, res) {
 
       // const send_at = `${year}-${month}-${day} ${hours}:${minutes}`;
 
-      const send_at = moment
-        .parseZone(date)
-        .local(true)
-        .format("YYYY-MM-DD HH:mm");
+      const send_at = localDate.format("YYYY-MM-DD HH:mm");
+
+      console.log(send_at);
 
       const template_id =
         dealType === "special"
@@ -80,23 +76,23 @@ export default async function handler(req, res) {
       // console.log(body);
 
       //testing
-      // res.status(200).json({ message_id: 123456789 });
+      res.status(200).json({ message_id: 123456789 });
 
       // !!! only uncomment this when you want to trigger real messages !!!
-      try {
-        const data = (
-          await axios.post("https://api.getback.ch/v1/push/message", body, {
-            headers: {
-              Authorization: process.env.GETBACK_API_KEY,
-              "Content-Type": "application/json",
-            },
-          })
-        ).data;
-        console.log(data);
-        res.status(200).json(data);
-      } catch {
-        res.status(500).send("Getback API error");
-      }
+      // try {
+      //   const data = (
+      //     await axios.post("https://api.getback.ch/v1/push/message", body, {
+      //       headers: {
+      //         Authorization: process.env.GETBACK_API_KEY,
+      //         "Content-Type": "application/json",
+      //       },
+      //     })
+      //   ).data;
+      //   console.log(data);
+      //   res.status(200).json(data);
+      // } catch {
+      //   res.status(500).send("Getback API error");
+      // }
     }
   } else {
     res.status(401).json("No access!");
