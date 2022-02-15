@@ -1,6 +1,5 @@
 import axios from "axios";
-import moment from "moment";
-import "moment-timezone";
+import { formatInTimeZone } from "date-fns-tz";
 import { getSession } from "next-auth/react";
 
 export default async function handler(req, res) {
@@ -30,20 +29,20 @@ export default async function handler(req, res) {
         dealUrl,
         dealType,
       } = req.body;
+
       const date = new Date(sendDate);
-      const localDate = moment.utc(date).tz("Europe/Zurich");
+      const send_at = formatInTimeZone(
+        date,
+        "Europe/Zurich",
+        "yyyy-MM-dd HH:mm"
+      );
 
       // const year = date.getFullYear();
       // const month = String(date.getMonth() + 1).padStart(2, "0");
       // const day = String(date.getDate()).padStart(2, "0");
       // const hours = String(date.getHours()).padStart(2, "0");
       // const minutes = String(date.getMinutes()).padStart(2, "0");
-
       // const send_at = `${year}-${month}-${day} ${hours}:${minutes}`;
-
-      const send_at = localDate.format("YYYY-MM-DD HH:mm");
-
-      console.log(send_at);
 
       const template_id =
         dealType === "special"
