@@ -42,7 +42,17 @@ export default function Home() {
 
   if (status === "unauthenticated" || !session) {
     // return router.push("/api/auth/signin");
-    return "Redirect to Signin Page";
+    return (
+      <div className="flex h-screen w-screen items-center justify-center">
+        <Spinner
+          thickness="4px"
+          speed="0.65s"
+          emptyColor="gray.200"
+          color="green.500"
+          size="xl"
+        />
+      </div>
+    );
   }
 
   return (
