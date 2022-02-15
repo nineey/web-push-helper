@@ -1,5 +1,5 @@
 import Layout from "../components/Layout";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Scraper from "../components/Scraper";
 import MessageBuilder from "../components/MessageBuilder";
 import { useSession } from "next-auth/react";
@@ -18,6 +18,14 @@ export default function Home() {
   const [dataFetched, setDataFetched] = useState(false);
   const [dataSent, setDataSent] = useState({ status: false, data: {} });
 
+  useEffect(() => {
+    if (status !== "loading") {
+      if (!session) {
+        router.push("/api/auth/signin");
+      }
+    }
+  }, [router, session, status]);
+
   if (status === "loading") {
     return (
       <div className="flex h-screen w-screen items-center justify-center">
@@ -32,8 +40,9 @@ export default function Home() {
     );
   }
 
-  if (status === "unauthenticated") {
-    return router.push("/api/auth/signin");
+  if (status === "unauthenticated" || !session) {
+    // return router.push("/api/auth/signin");
+    return "Redirect to Signin Page";
   }
 
   return (
