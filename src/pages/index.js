@@ -4,7 +4,7 @@ import Scraper from "../components/Scraper";
 import MessageBuilder from "../components/MessageBuilder";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import { Spinner } from "@chakra-ui/react";
+import FullScreenSpinner from "../components/elements/Spinner";
 
 export default function Home() {
   const { data: session, status } = useSession();
@@ -27,32 +27,12 @@ export default function Home() {
   }, [router, session, status]);
 
   if (status === "loading") {
-    return (
-      <div className="flex h-screen w-screen items-center justify-center">
-        <Spinner
-          thickness="4px"
-          speed="0.65s"
-          emptyColor="gray.200"
-          color="green.500"
-          size="xl"
-        />
-      </div>
-    );
+    return <FullScreenSpinner />;
   }
 
   if (status === "unauthenticated" || !session) {
     // return router.push("/api/auth/signin");
-    return (
-      <div className="flex h-screen w-screen items-center justify-center">
-        <Spinner
-          thickness="4px"
-          speed="0.65s"
-          emptyColor="gray.200"
-          color="green.500"
-          size="xl"
-        />
-      </div>
-    );
+    return <FullScreenSpinner />;
   }
 
   return (
