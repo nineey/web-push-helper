@@ -6,7 +6,8 @@ export default function Layout({ title, children }) {
     <>
       <Head>
         <title>Web Push Helper</title>
-        <meta name="description" content="description" />
+        <meta name="description" content="Web Push Helper for DayDeal.ch" />
+        <meta name="robots" content="noindex" />
       </Head>
 
       <div className="container mx-auto mt-5 px-4 mb-5">
