@@ -56,7 +56,13 @@ export default function MessageBuilder({
     if (today.getHours() >= 9) {
       const tomorrow = new Date();
       tomorrow.setDate(today.getDate() + 1);
+      if (dealType === "weekly") {
+        return tomorrow.setHours(10, 0, 0, 0);
+      }
       return tomorrow.setHours(9, 0, 0, 0);
+    }
+    if (dealType === "weekly") {
+      return new Date().setHours(10, 0, 0, 0);
     }
     return new Date().setHours(9, 0, 0, 0);
   }
@@ -89,6 +95,7 @@ export default function MessageBuilder({
 
   useEffect(() => {
     handleDescriptionByType();
+    setSendDate(defaultDate());
   }, [dealType, daydealPrice, originalPrice]);
 
   return (
