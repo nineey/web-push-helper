@@ -32,6 +32,25 @@ export default function MessageBuilder({
   const hours = String(date.getHours()).padStart(2, "0");
   const minutes = String(date.getMinutes()).padStart(2, "0");
 
+  function checkDay(inputDay) {
+    const today = new Date().getDate();
+
+    if (Number(inputDay) === today) {
+      return "Heute";
+    } else if (Number(inputDay) === today + 1) {
+      return "Morgen";
+    } else {
+      return `${day}.${month}.${year}`;
+    }
+  }
+
+  function checkIfDatePast(day) {
+    if (new Date() > sendDate) {
+      return true;
+    }
+    return;
+  }
+
   function defaultDate() {
     const today = new Date();
     if (today.getHours() >= 9) {
@@ -146,6 +165,7 @@ export default function MessageBuilder({
 
           <button
             className="btn bg-green-500 hover:bg-green-600 border-none w-full mt-5"
+            disabled={checkIfDatePast(day) && "disabled"}
             onClick={() => {
               sendMessage(
                 title,
@@ -160,17 +180,22 @@ export default function MessageBuilder({
               );
             }}
           >
-            Jetzt planen am
-            <span className="font-extrabold">
-              &nbsp; {day}.{month}.{year} &nbsp;
-            </span>
-            um &nbsp;
-            <span className="font-extrabold">
-              {hours}:{minutes} Uhr
-            </span>
-            &nbsp;
-            {isDraft === "true" && (
-              <span className="text-black">(Entwurf)</span>
+            {checkIfDatePast(day) ? (
+              "Datum in der Zukunft wählen"
+            ) : (
+              <>
+                Jetzt planen:
+                <span className="font-extrabold">
+                  &nbsp;{checkDay(day)}&nbsp;
+                </span>
+                um&nbsp;
+                <span className="font-extrabold">
+                  {hours}:{minutes} Uhr
+                </span>
+                {isDraft === "true" && (
+                  <span className="text-black">(Entwurf)</span>
+                )}
+              </>
             )}
           </button>
         </div>

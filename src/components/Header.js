@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { signOut } from "next-auth/react";
 import { BsFillBellFill } from "react-icons/bs";
-import { FaSmileWink } from "react-icons/fa";
+import { FiHelpCircle } from "react-icons/fi";
 import { useRouter } from "next/router";
 
 export default function Header() {
@@ -20,27 +20,31 @@ export default function Header() {
           htmlFor="modal-credits"
           className="btn btn-ghost modal-button hidden md:flex"
         >
-          Version 1.0
+          <FiHelpCircle className="text-2xl" />
         </label>
         <input type="checkbox" id="modal-credits" className="modal-toggle" />
-        <div className="modal">
+        <div className="modal text-slate-800">
           <div className="modal-box">
-            <p className="text-slate-800	">
+            <h2 className="font-bold text-xl">Credits</h2>
+            <p className="mb-5">
               This tool was built by Nicolas while drinking tea on some free
               evenings. Hope it makes your everyday life a little bit easier.{" "}
-              <FaSmileWink className="inline" />
+            </p>
+            <div>
+              <h2 className="font-bold text-xl">Do you have an issue?</h2>
+            </div>
+            <p className="">
+              You can reach me at:&nbsp;
+              <a href="mailto:dev@nicolasneeser.ch">dev@nicolasneeser.ch</a>
             </p>
             <div className="modal-action">
               <label htmlFor="modal-credits" className="btn">
-                Thanks!
+                Close
               </label>
             </div>
           </div>
         </div>
 
-        <button className="btn btn-ghost px-2 mr-3">
-          <a href="mailto:dev@nicolasneeser.ch">Help?</a>
-        </button>
         <div className="flex-none">
           {/* <Link href="/api/auth/signout"> */}
           <button
