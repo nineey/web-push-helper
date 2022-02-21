@@ -24,6 +24,7 @@ export default function MessageBuilder({
   const [finalDescription, setFinalDescription] = useState("");
   const [sendDate, setSendDate] = useState(defaultDate());
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const date = new Date(sendDate);
   const year = date.getFullYear();
@@ -31,6 +32,8 @@ export default function MessageBuilder({
   const day = String(date.getDate()).padStart(2, "0");
   const hours = String(date.getHours()).padStart(2, "0");
   const minutes = String(date.getMinutes()).padStart(2, "0");
+
+  console.log(loading);
 
   function checkDay(inputDay) {
     const today = new Date().getDate();
@@ -163,41 +166,48 @@ export default function MessageBuilder({
             </div>
           )}
 
-          <button
-            className="btn bg-green-500 hover:bg-green-600 border-none w-full mt-5"
-            disabled={checkIfDatePast(day) && "disabled"}
-            onClick={() => {
-              sendMessage(
-                title,
-                finalDescription,
-                imageUrl,
-                dealUrl,
-                isDraft,
-                sendDate,
-                dealType,
-                setError,
-                setDataSent
-              );
-            }}
-          >
-            {checkIfDatePast(day) ? (
-              "Datum in der Zukunft wählen"
-            ) : (
-              <>
-                Jetzt planen:
-                <span className="font-extrabold">
-                  &nbsp;{checkDay(day)}&nbsp;
-                </span>
-                um&nbsp;
-                <span className="font-extrabold">
-                  {hours}:{minutes} Uhr
-                </span>
-                {isDraft === "true" && (
-                  <span className="text-black">(Entwurf)</span>
+          {loading ? (
+            <button className="loading btn bg-green-500 hover:bg-green-600 border-none w-full mt-5"></button>
+          ) : (
+            <>
+              <button
+                className="btn bg-green-500 hover:bg-green-600 border-none w-full mt-5"
+                disabled={checkIfDatePast(day) && "disabled"}
+                onClick={() => {
+                  setLoading(true);
+                  sendMessage(
+                    title,
+                    finalDescription,
+                    imageUrl,
+                    dealUrl,
+                    isDraft,
+                    sendDate,
+                    dealType,
+                    setError,
+                    setDataSent
+                  );
+                }}
+              >
+                {checkIfDatePast(day) ? (
+                  "Datum in der Zukunft wählen"
+                ) : (
+                  <>
+                    Jetzt planen:
+                    <span className="font-extrabold">
+                      &nbsp;{checkDay(day)}&nbsp;
+                    </span>
+                    um&nbsp;
+                    <span className="font-extrabold">
+                      {hours}:{minutes} Uhr
+                    </span>
+                    {isDraft === "true" && (
+                      <span className="text-black">(Entwurf)</span>
+                    )}
+                  </>
                 )}
-              </>
-            )}
-          </button>
+              </button>
+            </>
+          )}
         </div>
       </div>
     </>

@@ -18,10 +18,6 @@ export default function Home() {
   const [dataFetched, setDataFetched] = useState(false);
   const [dataSent, setDataSent] = useState({ status: false, data: {} });
 
-  if (dataSent) {
-    console.log(dataSent.data);
-  }
-
   useEffect(() => {
     if (status !== "loading") {
       if (!session) {
