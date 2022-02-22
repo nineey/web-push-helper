@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import axios from "axios";
 
 export default function Scraper({
@@ -16,7 +16,7 @@ export default function Scraper({
   const [loading, setLoading] = useState(false);
   const [slug, setSlug] = useState("");
 
-  async function scrapeHTML(dealUrl) {
+  const scrapeHTML = useCallback(async (dealUrl) => {
     setLoading(true);
     try {
       const data = (await axios.get("/api/webScraper", { params: { dealUrl } }))
@@ -33,7 +33,7 @@ export default function Scraper({
       setDataFetched(false);
     }
     setLoading(false);
-  }
+  }, []);
 
   function onSubmit(e) {
     e.preventDefault();

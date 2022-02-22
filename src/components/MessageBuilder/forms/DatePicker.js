@@ -13,7 +13,8 @@ export default function DatePickerForm({ sendDate, setSendDate }) {
           selected={sendDate}
           onChange={(date) => setSendDate(date)}
           showTimeSelect
-          dateFormat="dd.MM.yyyy – hh:mm aa"
+          timeFormat="HH:mm"
+          dateFormat="dd.MM.yyyy – HH:mm"
         />
       </div>
     </>
