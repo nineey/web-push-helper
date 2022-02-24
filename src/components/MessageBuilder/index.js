@@ -122,7 +122,7 @@ export default function MessageBuilder({
           </div>
 
           <div className="mt-3">
-            <ImageUrl {...{ imageUrl, setImageUrl }} />
+            <ImageUrl {...{ imageUrl, setImageUrl, title, finalDescription }} />
           </div>
         </div>
         {/* right */}
