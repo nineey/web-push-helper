@@ -6,17 +6,15 @@ import { useRouter } from "next/router";
 
 export default function Header() {
   const router = useRouter();
-
-  if (process.env.NODE_ENV === "production") {
-    console.log("prod");
-  }
+  //only used in deployment and stage
+  const env = process.env.NEXT_PUBLIC_ENVIRONEMENT;
 
   return (
     <>
       <div className="navbar mb-2 shadow-lg bg-neutral text-neutral-content rounded-box mb-10">
         <div className="flex-1 px-2 mx-2 lg:flex">
           <span className="text-lg font-bold ">
-            Web Push Helper <BsFillBellFill className="inline" />
+            Web Push Helper <BsFillBellFill className="inline" /> {env}
           </span>
         </div>
 

@@ -78,10 +78,6 @@ export default async function handler(req, res) {
       //testing
       res.status(200).json({ message_id: 123456789 });
 
-      if (process.env.NODE_ENV === "production") {
-        console.log("dev");
-      }
-
       // !!! only uncomment this when you want to trigger real messages !!!
       // try {
       //   const data = (

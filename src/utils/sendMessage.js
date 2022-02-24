@@ -9,7 +9,8 @@ const sendMessage = async (
   sendDate,
   dealType,
   setError,
-  setDataSent
+  setDataSent,
+  setLoading
 ) => {
   try {
     const data = (
@@ -27,6 +28,7 @@ const sendMessage = async (
   } catch (e) {
     console.error(e);
     setError("Connection failed");
+    setLoading(false);
   }
 };
 

@@ -191,7 +191,8 @@ export default function MessageBuilder({
                     sendDate,
                     dealType,
                     setError,
-                    setDataSent
+                    setDataSent,
+                    setLoading
                   );
                 }}
               >
