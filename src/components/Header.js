@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 
 export default function Header() {
   const router = useRouter();
-  //only used in deployment and stage
+  //only used in development and stage
   const env = process.env.NEXT_PUBLIC_ENVIRONEMENT;
 
   return (

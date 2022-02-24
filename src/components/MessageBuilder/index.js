@@ -33,7 +33,7 @@ export default function MessageBuilder({
   const hours = String(date.getHours()).padStart(2, "0");
   const minutes = String(date.getMinutes()).padStart(2, "0");
 
-  console.log(loading);
+  // console.log(loading);
 
   function checkDay(inputDay) {
     const today = new Date().getDate();
