@@ -7,6 +7,10 @@ import { useRouter } from "next/router";
 export default function Header() {
   const router = useRouter();
 
+  if (process.env.NODE_ENV === "production") {
+    console.log("prod");
+  }
+
   return (
     <>
       <div className="navbar mb-2 shadow-lg bg-neutral text-neutral-content rounded-box mb-10">
