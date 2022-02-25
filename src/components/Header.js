@@ -14,8 +14,8 @@ export default function Header() {
       <div className="navbar mb-2 shadow-lg bg-neutral text-neutral-content rounded-box mb-10">
         <div className="flex-1 px-2 mx-2 lg:flex">
           <span className="text-lg font-bold ">
+            {env === "preview" && <span className="text-red-600">STAGE: </span>}
             Web Push Helper <BsFillBellFill className="inline" />
-            {env === "preview" && <span className="text-red-600">STAGE</span>}
           </span>
         </div>
 
