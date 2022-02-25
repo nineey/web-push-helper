@@ -7,14 +7,15 @@ import { useRouter } from "next/router";
 export default function Header() {
   const router = useRouter();
   //only used in development and stage
-  const env = process.env.NEXT_PUBLIC_ENVIRONEMENT;
+  const env = process.env.NEXT_PUBLIC_VERCEL_ENV;
 
   return (
     <>
       <div className="navbar mb-2 shadow-lg bg-neutral text-neutral-content rounded-box mb-10">
         <div className="flex-1 px-2 mx-2 lg:flex">
           <span className="text-lg font-bold ">
-            Web Push Helper <BsFillBellFill className="inline" /> {env}
+            Web Push Helper <BsFillBellFill className="inline" />
+            {env === "preview" && <span className="text-red-600">STAGE</span>}
           </span>
         </div>
 

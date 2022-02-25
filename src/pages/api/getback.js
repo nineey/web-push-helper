@@ -56,11 +56,15 @@ export default async function handler(req, res) {
           ? process.env.NEXT_PUBLIC_TTL_MINUTES_WEEKLY
           : process.env.NEXT_PUBLIC_TTL_MINUTES_SPECIAL;
 
+      const autohide =
+        dealType === "daily" ? 86400 : dealType === "weekly" ? 604800 : 7200;
+
       // prepare body
       const body = {
         is_draft: isDraft === "true" ? true : false,
         template_id: template_id,
         ttl: Number(ttl),
+        autohide: autohide,
         send_at: String(send_at),
         lang: {
           de: {
@@ -76,23 +80,23 @@ export default async function handler(req, res) {
       // console.log(body);
 
       //testing
-      res.status(200).json({ message_id: 123456789 });
+      // res.status(200).json({ message_id: 123456789 });
 
       // !!! only uncomment this when you want to trigger real messages !!!
-      // try {
-      //   const data = (
-      //     await axios.post("https://api.getback.ch/v1/push/message", body, {
-      //       headers: {
-      //         Authorization: process.env.GETBACK_API_KEY,
-      //         "Content-Type": "application/json",
-      //       },
-      //     })
-      //   ).data;
-      //   console.log(data);
-      //   res.status(200).json(data);
-      // } catch {
-      //   res.status(500).send("Getback API error");
-      // }
+      try {
+        const data = (
+          await axios.post("https://api.getback.ch/v1/push/message", body, {
+            headers: {
+              Authorization: process.env.GETBACK_API_KEY,
+              "Content-Type": "application/json",
+            },
+          })
+        ).data;
+        console.log(data);
+        res.status(200).json(data);
+      } catch {
+        res.status(500).send("Getback API error");
+      }
     }
   } else {
     res.status(401).json("No access!");
