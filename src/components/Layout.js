@@ -6,7 +6,7 @@ export default function Layout({ title, children }) {
     <>
       <Head>
         <title>Web Push Helper</title>
-        <meta name="description" content="Web Push Helper for DayDeal.ch" />
+        <meta name="description" content="Web Push Helper" />
         <meta name="robots" content="noindex" />
       </Head>
 

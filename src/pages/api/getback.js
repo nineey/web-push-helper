@@ -57,14 +57,18 @@ export default async function handler(req, res) {
           : process.env.NEXT_PUBLIC_TTL_MINUTES_SPECIAL;
 
       const autohide =
-        dealType === "daily" ? 86400 : dealType === "weekly" ? 604800 : 7200;
+        dealType === "daily"
+          ? process.env.NEXT_PUBLIC_AUTOHIDE_DAILY
+          : dealType === "weekly"
+          ? process.env.NEXT_PUBLIC_AUTOHIDE_WEEKLY
+          : process.env.NEXT_PUBLIC_AUTOHIDE_SPECIAL;
 
       // prepare body
       const body = {
         is_draft: isDraft === "true" ? true : false,
         template_id: template_id,
         ttl: Number(ttl),
-        autohide: autohide,
+        autohide: Number(autohide),
         send_at: String(send_at),
         lang: {
           de: {

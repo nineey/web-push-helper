@@ -152,6 +152,15 @@ export default function MessageBuilder({
               : `${process.env.NEXT_PUBLIC_TTL_MINUTES_SPECIAL} Minuten`}
           </div>
 
+          <div className="mt-3">
+            <p className="font-semibold">Autohide</p>
+            {dealType === "daily"
+              ? `${process.env.NEXT_PUBLIC_AUTOHIDE_DAILY / 3600} Stunden`
+              : dealType === "weekly"
+              ? `${process.env.NEXT_PUBLIC_AUTOHIDE_WEEKLY / 86400} Tage`
+              : `${process.env.NEXT_PUBLIC_AUTOHIDE_SPECIAL / 3600} Stunden`}
+          </div>
+
           {error && (
             <div className="alert alert-error w-68 mt-5">
               <div className="flex-1">
