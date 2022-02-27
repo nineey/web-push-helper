@@ -6,11 +6,11 @@ export default function FormDescription({
 }) {
   const [textLength, setTextLength] = useState(0);
 
-  const timeIndicator = {
-    daily: "Heute für nur",
-    weekly: "Diese Woche für nur",
-    special: "Jetzt für nur",
-  };
+  // const timeIndicator = {
+  //   daily: "Heute für nur",
+  //   weekly: "Diese Woche für nur",
+  //   special: "Jetzt für nur",
+  // };
 
   useEffect(() => {
     setTextLength(finalDescription.length);
