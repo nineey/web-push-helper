@@ -49,7 +49,7 @@ export default function Scraper({
     <>
       <div className="mt-3">
         <form onSubmit={onSubmit}>
-          <label class="input-group input-group-md font-semibold">
+          <label className="input-group input-group-md font-semibold">
             <span>https://daydeal.ch/</span>
             <input
               type="text"
