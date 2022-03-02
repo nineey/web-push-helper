@@ -1,15 +1,10 @@
-import { Spinner } from "@chakra-ui/react";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+import { Triangle } from "react-loader-spinner";
 
 export default function FullScreenSpinner() {
   return (
     <div className="flex h-screen w-screen items-center justify-center">
-      <Spinner
-        thickness="4px"
-        speed="0.65s"
-        emptyColor="gray.200"
-        color="green.500"
-        size="xl"
-      />
+      <Triangle color="#18181B" height={50} width={50} />{" "}
     </div>
   );
 }

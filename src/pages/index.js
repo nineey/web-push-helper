@@ -80,16 +80,16 @@ export default function Home() {
           <div className="flex-1">
             <svg
               xmlns="http://www.w3.org/2000/svg"
+              className="stroke-current flex-shrink-0 h-6 w-6 mr-2"
               fill="none"
               viewBox="0 0 24 24"
-              className="w-6 h-6 mx-2 stroke-current"
             >
               <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"
-              ></path>
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
             </svg>
             <label>
               Message created! Getback-ID: {dataSent.data.message_id}

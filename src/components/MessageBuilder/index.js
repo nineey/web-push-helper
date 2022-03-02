@@ -218,7 +218,7 @@ export default function MessageBuilder({
                       {hours}:{minutes} Uhr
                     </span>
                     {isDraft === "true" && (
-                      <span className="text-black">(Entwurf)</span>
+                      <span className="text-black">&nbsp;(Entwurf)</span>
                     )}
                   </>
                 )}

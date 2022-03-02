@@ -1,5 +1,6 @@
 import { useEffect, useState, useCallback } from "react";
 import axios from "axios";
+import styled from "styled-components";
 
 export default function Scraper({
   setTitle,
@@ -48,25 +49,27 @@ export default function Scraper({
     <>
       <div className="mt-3">
         <form onSubmit={onSubmit}>
-          <span className="text-lg mr-3 mt-3">https://daydeal.ch/</span>
-          <input
-            type="text"
-            placeholder="slug to deal"
-            className="input input-bordered w-full md:w-96 text-lg font-semibold"
-            value={slug}
-            onChange={(e) => setSlug(e.target.value)}
-          ></input>
+          <label class="input-group input-group-md font-semibold">
+            <span>https://daydeal.ch/</span>
+            <input
+              type="text"
+              placeholder="slug to deal (OG tags must be set)"
+              className="input input-bordered w-full md:w-96 font-semibold"
+              value={slug}
+              onChange={(e) => setSlug(e.target.value)}
+            ></input>
+          </label>
           <div className="flex mt-3 items-center">
             {loading ? (
-              <button className="btn loading w-36"></button>
+              <StyledButton className="btn loading"></StyledButton>
             ) : (
-              <button type="submit" className="btn w-36">
+              <StyledButton type="submit" className="btn">
                 {dataFetched ? "Fetch again" : "Fetch!"}
-              </button>
+              </StyledButton>
             )}
 
             {error && (
-              <div className="alert alert-error w-68 ml-3">
+              <div className="alert alert-error w-68 ml-3 h-12">
                 <div className="">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -91,3 +94,7 @@ export default function Scraper({
     </>
   );
 }
+
+const StyledButton = styled.button`
+  width: 11.4em;
+`;
