@@ -88,7 +88,7 @@ export default async function handler(req, res) {
       //testing
       // res.status(200).json({ message_id: 123456789 });
 
-      !!! only uncomment this when you want to trigger real messages !!!
+      // !!! only uncomment this when you want to trigger real messages !!!
       try {
         const data = (
           await axios.post("https://api.getback.ch/v1/push/message", body, {
