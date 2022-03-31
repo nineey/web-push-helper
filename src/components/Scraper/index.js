@@ -42,7 +42,7 @@ export default function Scraper({
   }
 
   useEffect(() => {
-    setUrl(`https://daydeal.ch/${slug}`);
+    setUrl(`https://www.daydeal.ch/${slug}`);
   }, [slug]);
 
   return (

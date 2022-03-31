@@ -63,6 +63,8 @@ export default async function handler(req, res) {
           ? process.env.NEXT_PUBLIC_AUTOHIDE_WEEKLY
           : process.env.NEXT_PUBLIC_AUTOHIDE_SPECIAL;
 
+      const finalUrl = `${dealUrl}?utm_source=getback&utm_medium=webpush`;
+
       // prepare body
       const body = {
         is_draft: isDraft === "true" ? true : false,
@@ -75,32 +77,32 @@ export default async function handler(req, res) {
             title: title,
             body: description,
             image: imageUrl,
-            link: dealUrl,
-            action_buttons: [{ text: "Jetzt bestellen", link: dealUrl }],
+            link: finalUrl,
+            action_buttons: [{ text: "Jetzt bestellen", link: finalUrl }],
           },
         },
       };
 
-      // console.log(body);
+      console.log(body);
 
       //testing
-      // res.status(200).json({ message_id: 123456789 });
+      res.status(200).json({ message_id: 123456789 });
 
       // !!! only uncomment this when you want to trigger real messages !!!
-      try {
-        const data = (
-          await axios.post("https://api.getback.ch/v1/push/message", body, {
-            headers: {
-              Authorization: process.env.GETBACK_API_KEY,
-              "Content-Type": "application/json",
-            },
-          })
-        ).data;
-        console.log(data);
-        res.status(200).json(data);
-      } catch {
-        res.status(500).send("Getback API error");
-      }
+      // try {
+      //   const data = (
+      //     await axios.post("https://api.getback.ch/v1/push/message", body, {
+      //       headers: {
+      //         Authorization: process.env.GETBACK_API_KEY,
+      //         "Content-Type": "application/json",
+      //       },
+      //     })
+      //   ).data;
+      //   console.log(data);
+      //   res.status(200).json(data);
+      // } catch {
+      //   res.status(500).send("Getback API error");
+      // }
     }
   } else {
     res.status(401).json("No access!");

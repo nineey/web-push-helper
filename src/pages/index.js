@@ -10,7 +10,7 @@ export default function Home() {
   const { data: session, status } = useSession();
   const router = useRouter();
 
-  const [dealUrl, setUrl] = useState("https://daydeal.ch/");
+  const [dealUrl, setUrl] = useState("https://www.daydeal.ch/");
   const [title, setTitle] = useState("");
   const [daydealPrice, setDayDealPrice] = useState("");
   const [originalPrice, setOriginalPrice] = useState("");
