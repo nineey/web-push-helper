@@ -12,6 +12,7 @@ export default function Scraper({
   setDataSent,
   dealUrl,
   setUrl,
+  setDealSubtitle,
 }) {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -29,6 +30,7 @@ export default function Scraper({
       setError("");
       setDataFetched(true);
       setDataSent(false);
+      setDealSubtitle(data.dealSubtitle);
     } catch (e) {
       setError("Invalid URL or past deal");
       setDataFetched(false);

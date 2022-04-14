@@ -28,6 +28,7 @@ export default async function handler(req, res) {
         sendDate,
         dealUrl,
         dealType,
+        dealSubtitle,
       } = req.body;
 
       const date = new Date(sendDate);
@@ -63,7 +64,14 @@ export default async function handler(req, res) {
           ? process.env.NEXT_PUBLIC_AUTOHIDE_WEEKLY
           : process.env.NEXT_PUBLIC_AUTOHIDE_SPECIAL;
 
-      const finalUrl = `${dealUrl}?utm_source=getback&utm_medium=webpush`;
+      const getFinalUrl = (dealSubtitle) => {
+        const suffix = dealSubtitle.replace(/ /g, "_");
+        const finalUrl = `${dealUrl}?utm_source=getback&utm_medium=webpush&utm_campaign=!cc-cmot!l-d!e-gb!z-${suffix}`;
+        //  https://daydeal.ch?utm_source=getback&utm_medium=webpush&utm_campaign=!cc-cmot!l-d!e-gb!z-title
+        return finalUrl;
+      };
+
+      const finalUrl = getFinalUrl(dealSubtitle);
 
       // prepare body
       const body = {
@@ -83,8 +91,6 @@ export default async function handler(req, res) {
         },
       };
 
-      console.log(body);
-
       //testing
       // res.status(200).json({ message_id: 123456789 });
 
@@ -98,7 +104,6 @@ export default async function handler(req, res) {
             },
           })
         ).data;
-        console.log(data);
         res.status(200).json(data);
       } catch {
         res.status(500).send("Getback API error");

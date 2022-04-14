@@ -17,6 +17,7 @@ export default function MessageBuilder({
   daydealPrice,
   originalPrice,
   setDataSent,
+  dealSubtitle,
 }) {
   // message relevant content
   const [isDraft, setDraft] = useState(false);
@@ -201,7 +202,8 @@ export default function MessageBuilder({
                     dealType,
                     setError,
                     setDataSent,
-                    setLoading
+                    setLoading,
+                    dealSubtitle
                   );
                 }}
               >

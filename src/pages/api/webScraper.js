@@ -37,11 +37,16 @@ export default async function handler(req, res) {
       .querySelector("[property~=og:image][content]")
       .getAttribute("content");
 
+    const dealSubtitle = root.querySelector(
+      ".product-description__title2"
+    ).textContent;
+
     const finalRes = {
       title: dealTitle,
       daydealPrice: daydealPrice,
       originalPrice: originalPrice,
       imageUrl: imageUrl,
+      dealSubtitle: dealSubtitle,
     };
 
     res.status(200).json(finalRes);

@@ -10,7 +10,8 @@ const sendMessage = async (
   dealType,
   setError,
   setDataSent,
-  setLoading
+  setLoading,
+  dealSubtitle
 ) => {
   try {
     const data = (
@@ -22,6 +23,7 @@ const sendMessage = async (
         sendDate: sendDate,
         dealType: dealType,
         dealUrl: dealUrl,
+        dealSubtitle: dealSubtitle,
       })
     ).data;
     setDataSent({ status: true, data: data });

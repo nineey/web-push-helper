@@ -17,6 +17,7 @@ export default function Home() {
   const [imageUrl, setImageUrl] = useState("");
   const [dataFetched, setDataFetched] = useState(false);
   const [dataSent, setDataSent] = useState({ status: false, data: {} });
+  const [dealSubtitle, setDealSubtitle] = useState();
 
   useEffect(() => {
     if (status !== "loading") {
@@ -49,6 +50,7 @@ export default function Home() {
           setDataSent,
           dealUrl,
           setUrl,
+          setDealSubtitle,
         }}
       />
 
@@ -70,6 +72,7 @@ export default function Home() {
               daydealPrice,
               originalPrice,
               setDataSent,
+              dealSubtitle,
             }}
           />
         </>
