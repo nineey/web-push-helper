@@ -65,13 +65,14 @@ export default async function handler(req, res) {
           : process.env.NEXT_PUBLIC_AUTOHIDE_SPECIAL;
 
       const getFinalUrl = (dealSubtitle) => {
-        const suffix = dealSubtitle.replace(/ /g, "_");
-        const finalUrl = `${dealUrl}?utm_source=getback&utm_medium=webpush&utm_campaign=!cc-cmot!l-d!e-gb!z-${suffix}`;
-        //  https://daydeal.ch?utm_source=getback&utm_medium=webpush&utm_campaign=!cc-cmot!l-d!e-gb!z-title
+        const suffix = dealSubtitle.replace(/ /g, "_").toLowerCase();
+        const finalUrl = `${dealUrl}?utm_source=getback&utm_medium=webp&utm_campaign=!cc-cmot!l-d!e-gb!t2-webp!i2-${suffix}`;
+        //  https://daydeal.ch?utm_source=getback&utm_medium=webp&utm_campaign=!cc-cmot!l-d!e-gb!z-title
         return finalUrl;
       };
 
       const finalUrl = getFinalUrl(dealSubtitle);
+      console.log(finalUrl);
 
       // prepare body
       const body = {
