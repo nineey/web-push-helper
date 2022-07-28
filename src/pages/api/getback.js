@@ -38,12 +38,11 @@ export default async function handler(req, res) {
         "yyyy-MM-dd HH:mm"
       );
 
-      // const year = date.getFullYear();
-      // const month = String(date.getMonth() + 1).padStart(2, "0");
-      // const day = String(date.getDate()).padStart(2, "0");
-      // const hours = String(date.getHours()).padStart(2, "0");
-      // const minutes = String(date.getMinutes()).padStart(2, "0");
-      // const send_at = `${year}-${month}-${day} ${hours}:${minutes}`;
+      const dateForTracking = formatInTimeZone(
+        date,
+        "Europe/Zurich",
+        "yyyy_MM_dd_HH"
+      );
 
       const template_id =
         dealType === "special"
@@ -65,9 +64,9 @@ export default async function handler(req, res) {
           : process.env.NEXT_PUBLIC_AUTOHIDE_SPECIAL;
 
       const getFinalUrl = (dealSubtitle) => {
-        const suffix = dealSubtitle.replace(/ /g, "_").toLowerCase();
+        // const suffix = dealSubtitle.replace(/ /g, "_").toLowerCase();
+        const suffix = dateForTracking;
         const finalUrl = `${dealUrl}?utm_source=getback&utm_medium=webp&utm_campaign=!cc-cmot!l-d!e-gb!t2-webp!i2-${suffix}`;
-        //  https://daydeal.ch?utm_source=getback&utm_medium=webp&utm_campaign=!cc-cmot!l-d!e-gb!z-title
         return finalUrl;
       };
 
